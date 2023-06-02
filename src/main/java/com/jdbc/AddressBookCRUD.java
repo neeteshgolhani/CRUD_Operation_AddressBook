@@ -1,9 +1,6 @@
 package com.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AddressBookCRUD {
     // JDBC database connection parameters
@@ -14,29 +11,35 @@ public class AddressBookCRUD {
     public static void main(String[] args) {
         // Step 1: Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            // Step 2: Create a new contact (Create operation)
-            createContact(connection, "Rohit", "Sam", "Main Street", "Gurgao", "Pujab", "323232", "+91 13323-4567", "Rohit.sam@example.com");
+            // Step 2: Retrieve contacts (Read operation)
+            retrieveContacts(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void createContact(Connection connection, String firstName, String lastName, String address, String city, String state, String zip, String phone, String email) throws SQLException {
-        String sql = "INSERT INTO address_book (first_name, last_name, address, city, state, zip, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static void retrieveContacts(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM address_book";
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1,"Rohit");//firstname
-            statement.setString(2, "Sam");//lastname
-            statement.setString(3, "Main Street");//address
-            statement.setString(4, "Gurgao");//city
-            statement.setString(5, "Punjab");//state
-            statement.setString(6, "323232");//pincode
-            statement.setString(7, "+91 13323-4567");//contact
-            statement.setString(8, "Rohit.sam@example.com");//email
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            System.out.println("Contacts:");
+            while (resultSet.next()) {
+                // Retrieve the data for each contact from the ResultSet
 
-            statement.executeUpdate();
+                int id = resultSet.getInt("id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String address = resultSet.getString("address");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                String zip = resultSet.getString("zip");
+                String phone = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                // Print the details of each contact
 
-            System.out.println("Contact created successfully.");
+                System.out.println("ID: " + id + ", Name: " + firstName + " " + lastName + ", Address: " + address + ", City: " + city + ", State: " + state + ", Zip: " + zip + ", Phone: " + phone + ", Email: " + email);
+            }
         }
     }
 }
