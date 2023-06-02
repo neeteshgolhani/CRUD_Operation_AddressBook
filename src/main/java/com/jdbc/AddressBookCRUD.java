@@ -12,7 +12,7 @@ public class AddressBookCRUD {
         // Step 1: Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
             // Step 2: Update a contact (Update operation)
-            updateContact(connection, 6, "Rohit", "Sam", "Main street", "Gurgao", "Punjab", "323232", "+91 13323-4567", "Rohit.sam@example.com");
+            updateContact(connection, 6, "Rohit", "Very", "Main street", "Gurgao", "Punjab", "323232", "+91 13323-4567", "Rohit.sam@example.com");
         } catch (SQLException e) {
             e.printStackTrace();
         }
