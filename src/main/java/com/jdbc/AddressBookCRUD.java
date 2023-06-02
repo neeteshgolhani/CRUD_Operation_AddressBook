@@ -25,14 +25,14 @@ public class AddressBookCRUD {
         String sql = "INSERT INTO address_book (first_name, last_name, address, city, state, zip, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1,"Rohit");//firstname
-            statement.setString(2, "Sam");//lastname
-            statement.setString(3, "Main Street");//address
-            statement.setString(4, "Gurgao");//city
-            statement.setString(5, "Punjab");//state
-            statement.setString(6, "323232");//pincode
-            statement.setString(7, "+91 13323-4567");//contact
-            statement.setString(8, "Rohit.sam@example.com");//email
+            statement.setString(1,firstName);//firstname
+            statement.setString(2, lastName);//lastname
+            statement.setString(3, address);//address
+            statement.setString(4, city);//city
+            statement.setString(5, state);//state
+            statement.setString(6, zip);//pincode
+            statement.setString(7, phone);//contact
+            statement.setString(8, email);//email
 
             statement.executeUpdate();
 
