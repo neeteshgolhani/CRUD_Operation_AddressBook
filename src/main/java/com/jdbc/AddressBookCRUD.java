@@ -22,15 +22,15 @@ public class AddressBookCRUD {
         String sql = "UPDATE address_book SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, phone=?, email=? WHERE id=?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, "Amit");
-            statement.setString(2, "Ar");
-            statement.setString(3, "ABC road line");
-            statement.setString(4, "Jalandhar");
-            statement.setString(5, "UP");
-            statement.setString(6, "456456");
-            statement.setString(7, "91222333333");
-            statement.setString(8, "AMIT@GMAIL.COM");
-            statement.setInt(9, 6);
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, address);
+            statement.setString(4, city);
+            statement.setString(5, state);
+            statement.setString(6, zip);
+            statement.setString(7, phone);
+            statement.setString(8, email);
+            statement.setInt(9, id);
 
             int rowsUpdated = statement.executeUpdate();
 
